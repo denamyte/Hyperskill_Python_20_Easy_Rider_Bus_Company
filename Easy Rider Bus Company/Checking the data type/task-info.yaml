@@ -169,6 +169,12 @@ files:
     if __name__ == '__main__':
         EasyRiderStage1('easyrider.easyrider').run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/128/stages/680/implement#comment
-status: Unchecked
-record: -1
+- name: easyrider/validation.py
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/10888#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 11 Jan 2023 14:25:37 UTC"
+record: 1

@@ -137,6 +137,6 @@ files:
     if __name__ == '__main__':
         EasyRiderStage6('easyrider.easyrider').run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/128/stages/685/implement#comment
+feedback_link: https://hyperskill.org/learn/step/10893#comment
 status: Unchecked
 record: -1

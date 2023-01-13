@@ -170,6 +170,56 @@ files:
     if __name__ == '__main__':
         EasyRiderStage2('easyrider.easyrider').run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/128/stages/681/implement#comment
-status: Unchecked
+- name: easyrider/validation.py
+  visible: true
+  text: |
+    import json
+    from dataclasses import dataclass
+    from typing import Dict, Any, Callable
+
+    PREDICATE = Callable[[Any], bool]
+
+    is_str: PREDICATE = lambda v: type(v).__name__ == 'str'
+    is_int: PREDICATE = lambda v: type(v).__name__ == 'int'
+
+    is_not_empty_str: PREDICATE = lambda v: is_str(v) and v
+    is_stop_type_str: PREDICATE = lambda v: is_str(v) and len(v) in [0, 1]
+
+
+    @dataclass
+    class MetaInfo:
+        test: PREDICATE
+
+
+    FIELDS_META: Dict[str, MetaInfo] = {
+        'bus_id': MetaInfo(is_int),
+        'stop_id': MetaInfo(is_int),
+        'stop_name': MetaInfo(is_not_empty_str),
+        'next_stop': MetaInfo(is_int),
+        'stop_type': MetaInfo(is_stop_type_str),
+        'a_time': MetaInfo(is_not_empty_str)}
+
+
+    class Validation:
+        def __init__(self, json_str: str):
+            self.json = json.loads(json_str)
+            self.errors: Dict[str, int] = {k: 0 for k in FIELDS_META.keys()}
+            self._check()
+
+        def _check(self):
+            for r in self.json:
+                record: Dict[str, Any] = r
+                for name, meta in FIELDS_META.items():
+                    self.errors[name] += not meta.test(record.get(name))
+
+        def __str__(self):
+            total = sum(self.errors.values())
+            return f'Type and required field validation: {total} errors\n' + \
+                   '\n'.join(f'{k}: {v}' for k, v, in self.errors.items())
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/10889#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 13 Jan 2023 19:46:21 UTC"
 record: -1
