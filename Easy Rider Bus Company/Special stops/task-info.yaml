@@ -162,5 +162,8 @@ files:
             #        '\n'.join(f'{k}: {v}' for k, v, in self._errors.items())
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/10891#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Mon, 16 Jan 2023 01:49:06 UTC"
 record: -1
